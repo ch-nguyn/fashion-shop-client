@@ -1,12 +1,10 @@
 import * as React from "react";
-import { ChangeEvent, useEffect, useState } from "react";
-import { IUser } from "../../interfaces/userInterface";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input } from "@mui/material";
 import Swal from "sweetalert2";
 import userApi from "../../api/modules/userApi";
 import { AxiosResponse } from "axios";
-import ImageUploading from "react-images-uploading";
 import AccountDetailsSke from "../skeleton/AccountDetailsSke";
 import { useAppSelector } from "../../store/hooks";
 
