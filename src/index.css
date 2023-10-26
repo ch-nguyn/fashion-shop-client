@@ -1,13 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -moz-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  -khtml-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.active {
+  color: #0cc3ce;
+  opacity: 1;
+}
+
+.slider .swiper-button-next,
+.slider .swiper-button-prev {
+  color: #fff !important ;
+  opacity: 0.8 !important;
+}
+
+.new-prod .swiper-button-next::after,
+.new-prod .swiper-button-prev::after {
+  color: #000 !important ;
+  opacity: 0.8 !important;
+  font-size: 30px !important;
+  padding: 10px;
+}
+
+.slider .swiper-pagination-bullet-active {
+  background: #fff !important;
+}
+
+.slider .swiper-pagination-bullet {
+  width: 50px !important;
+  border-radius: 0 !important;
+  height: 5px !important;
+  background: #fff !important;
+}
+
+footer h3 {
+  text-transform: uppercase;
+  /* font-weight: 600; */
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+footer p {
+  margin-bottom: 10px;
+  word-spacing: 1px;
+}
+
+footer span {
+  text-transform: capitalize;
+  font-weight: 600;
+  margin-right: 4px;
+  font-size: 18px;
+}
+
+footer a {
+  text-decoration: underline;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0cc3ce;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #88f7fc;
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+#sidebar::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+/* Handle */
+#sidebar::-webkit-scrollbar-thumb {
+  background: #e6fbfc;
+}
+
+/* Handle on hover */
+#sidebar::-webkit-scrollbar-thumb:hover {
+  background: #0cc3ce;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
