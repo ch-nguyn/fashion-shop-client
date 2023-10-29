@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { refreshAccessToken } from "../../utils/setting/config";
 
 const privateClient: AxiosInstance = axios.create({
-  baseURL: `/api/v1`,
+  baseURL: `https://fashion-shop-server-production.up.railway.app/api/v1`,
 });
 
 privateClient.interceptors.request.use(

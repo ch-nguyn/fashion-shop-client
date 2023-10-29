@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const publicClient = axios.create({
-  baseURL: `/api/v1`,
+  baseURL: `https://fashion-shop-server-production.up.railway.app/api/v1`,
   headers: {
     "Content-Type": "application/json",
   },
