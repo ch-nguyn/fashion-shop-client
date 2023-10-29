@@ -157,10 +157,10 @@ export default function Sidebar(props: ISidebarProps) {
             {props.filterStatus?.map((filterstatus: IFilterCheckbox) => (
               <div
                 key={Math.random()}
-                className="flex justify-between items-center"
+                className="flex justify-between items-center text-[15px]"
               >
                 <FormControlLabel
-                  className="capitalize cursor-pointer w-full hover:text-fresh"
+                  className="capitalize  cursor-pointer w-full hover:text-fresh"
                   value="end"
                   control={<Radio color="default" />}
                   label={filterstatus.label}

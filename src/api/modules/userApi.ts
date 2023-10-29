@@ -11,6 +11,8 @@ const userApi = {
   updateMe: (params: UpdateUser) =>
     privateClient.patch("/users/update-me", params),
   deleteUser: (id: string) => privateClient.delete(`/users/${id}`),
+  deleteAddress: (id: string) =>
+    privateClient.delete(`/users/delete-address/${id}`),
 };
 
 export default userApi;

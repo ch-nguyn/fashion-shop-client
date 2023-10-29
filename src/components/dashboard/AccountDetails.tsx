@@ -107,12 +107,7 @@ export default function AccountDetails(props: IAccountDetailsProps) {
           >
             <div className="flex w-full mb-6 gap-8">
               <p className="basis-[25%] text-right">Email:</p>
-              <p className="basis-[75%]">
-                {user?.email}{" "}
-                <span className="text-xs text-gray">
-                  (you cannot change email)
-                </span>
-              </p>
+              <p className="basis-[75%]">{user?.email}</p>
             </div>
             <div className="flex w-full mb-6 items-center gap-8">
               <p className="basis-[25%] text-right">Username:</p>

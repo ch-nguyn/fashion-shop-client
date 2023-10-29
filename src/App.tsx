@@ -41,7 +41,7 @@ function App() {
 
           <Route element={<AccountLayout />}>
             <Route
-              path="/account/me"
+              path="/account/me/:folder"
               element={
                 <ProtectedRoute>
                   <DashBoard></DashBoard>

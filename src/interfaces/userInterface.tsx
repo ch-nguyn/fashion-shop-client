@@ -5,6 +5,7 @@ export interface IAddress {
   ward?: string;
   detailAddress?: string;
   zipcode?: string;
+  _id?: string;
 }
 
 export interface IUser {

@@ -47,7 +47,7 @@ export default function HeaderMobile(props: IHeaderMobileProps) {
       <div
         onClick={() => {
           if (Cookies.get("refreshToken")) {
-            navigate("/account/me");
+            navigate("/account/me/profile");
           } else {
             navigate("/account/login");
           }

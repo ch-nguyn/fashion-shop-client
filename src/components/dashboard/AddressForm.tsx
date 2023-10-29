@@ -15,8 +15,6 @@ import { countries } from "../../data/countries";
 import CloseButton from "../common/CloseButton";
 import userApi from "../../api/modules/userApi";
 import Swal from "sweetalert2";
-import { useAppSelector } from "../../store/hooks";
-import { IAddress } from "../../interfaces/userInterface";
 export interface IAddressFormProps {
   setIsShowForm: React.Dispatch<React.SetStateAction<boolean>>;
   setRecall: React.Dispatch<React.SetStateAction<number>>;

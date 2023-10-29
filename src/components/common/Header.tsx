@@ -94,7 +94,7 @@ export default function Header() {
           <span
             onClick={() => {
               Cookies.get("refreshToken")
-                ? navigate("/account/me")
+                ? navigate("/account/me/profile")
                 : navigate("/account/login");
               window.scrollTo(0, 0);
             }}
