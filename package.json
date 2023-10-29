@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://fashion-shop-server-production.up.railway.app",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
@@ -60,7 +60,7 @@
     ]
   },
   "engines": {
-    "node": "18.x"
+    "node": "19.x"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.3",
