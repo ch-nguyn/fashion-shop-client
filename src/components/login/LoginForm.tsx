@@ -35,7 +35,7 @@ export default function LoginForm(props: ILoginFormProps) {
             `Welcome back ${res.data.user.name}!`,
             "success"
           ).then(() => {
-            navigate("/account/me");
+            navigate("/account/me/profile");
             window.scrollTo(0, 0);
           });
         }

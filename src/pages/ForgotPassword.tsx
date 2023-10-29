@@ -20,7 +20,7 @@ export default function ForgotPassword(props: IForgotPasswordProps) {
   const [email, setEmail] = useState<string>("");
   const navigate = useNavigate();
   useEffect(() => {
-    if (Cookies.get("refreshToken")) navigate("/account/me");
+    if (Cookies.get("refreshToken")) navigate("/account/me/profile");
   }, []);
 
   const onSubmit = () => {

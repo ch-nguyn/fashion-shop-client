@@ -28,7 +28,7 @@ export default function ResetPassword(props: IResetPasswordProps) {
     passwordConfirm: "",
   });
   useEffect(() => {
-    if (Cookies.get("refreshToken")) navigate("/account/me");
+    if (Cookies.get("refreshToken")) navigate("/account/me/profile");
   }, []);
 
   const onSubmit = () => {
@@ -37,7 +37,7 @@ export default function ResetPassword(props: IResetPasswordProps) {
       .resetPassword(token, resetPassword)
       .then((res: AxiosResponse) => {
         Swal.fire("Success!", "Your password is changed!", "success").then(() =>
-          navigate("/account/me")
+          navigate("/account/me/profile")
         );
       })
       .catch((e) =>

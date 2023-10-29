@@ -7,6 +7,7 @@ import { getUserStart } from "../features/slice/userSlice";
 import { getCartProduct } from "../features/slice/productSlice";
 import { useForm } from "react-hook-form";
 import Information from "../components/checkout/Information";
+import CheckoutProducts from "../components/checkout/CheckoutProducts";
 
 export interface ICheckoutProps {}
 
@@ -28,11 +29,13 @@ export default function Checkout(props: ICheckoutProps) {
       <div className="w-full h-[50vh] max-sm:h-[40vh] bg-center bg-cover bg-fixed flex items-center justify-center bg-[url('https://suprema.qodeinteractive.com/wp-content/uploads/2016/01/cartt-title-image.jpg')]">
         <p className="text-white text-7xl max-lg:text-5xl">Checkout</p>
       </div>
-      <div className="mt-24 mb-24 flex max-w-[1200px] mx-auto px-5 gap-10">
-        <div className="basis-3/5 ">
+      <div className=" mb-24 flex max-w-[1200px] mx-auto px-5 gap-10">
+        <div className="basis-1/2 ">
           <Information />
         </div>
-        <div className="basis-2/5 bg-extra-light"></div>
+        <div className="basis-1/2 bg-extra-light">
+          <CheckoutProducts />
+        </div>
       </div>
     </div>
   );

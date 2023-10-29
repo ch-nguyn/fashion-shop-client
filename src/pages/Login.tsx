@@ -12,7 +12,7 @@ export default function Login(props: ILoginProps) {
   const [status, setStatus] = useState<"login" | "signup">("login");
   const navigate = useNavigate();
   useEffect(() => {
-    if (Cookies.get("refreshToken")) navigate("/account/me");
+    if (Cookies.get("refreshToken")) navigate("/account/me/profile");
   }, []);
   const [login, setLogin] = useState<ILogin>({
     email: "",

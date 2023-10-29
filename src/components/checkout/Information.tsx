@@ -16,7 +16,7 @@ export default function Information(props: IInformationProps) {
   }, [user]);
   const [isShow, setIsShow] = useState<boolean>(false);
   return (
-    <div>
+    <div className="pt-14">
       {isShow && (
         <ChangeAddress
           setCurrentAddress={setCurrentAddress}
