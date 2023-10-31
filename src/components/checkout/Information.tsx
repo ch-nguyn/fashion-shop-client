@@ -1,29 +1,93 @@
 import * as React from "react";
-import { useAppSelector } from "../../store/hooks";
-import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useCallback, useEffect, useState } from "react";
 import { IAddress } from "../../interfaces/userInterface";
 import ChangeAddress from "./ChangeAddress";
+import PaymentItem from "./PaymentItem";
+import Swal from "sweetalert2";
+import { CircularProgress } from "@mui/material";
+import orderApi from "../../api/modules/orderApi";
+import { OrderItem } from "../../interfaces/orderInterface";
+import { ICart } from "../../interfaces/productInterface";
+import { useNavigate } from "react-router-dom";
+import {
+  clearCart,
+  removeCartProduct,
+} from "../../features/slice/productSlice";
 
-export interface IInformationProps {}
+export interface IInformationProps {
+  currentAddress: IAddress | undefined;
+  setCurrentAddress: React.Dispatch<React.SetStateAction<IAddress | undefined>>;
+  shippingFee: number;
+}
 
 export default function Information(props: IInformationProps) {
   const { user } = useAppSelector((state) => state.user);
-  const [currentAddress, setCurrentAddress] = useState<IAddress>();
-  useEffect(() => {
-    if (user.address) {
-      setCurrentAddress(user.address[0]);
-    }
-  }, [user]);
+  const { cartItems } = useAppSelector((state) => state.product);
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [payment, setPayment] = useState<string>("delivery");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const handleCreateOrder = useCallback(() => {
+    Swal.fire({
+      title: "Create order?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#0cc3ce",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsLoading(true);
+        let address: string = "";
+        if (props.currentAddress?.country === "Viet Nam") {
+          address = `${props.currentAddress.detailAddress}, ${props.currentAddress.ward}, ${props.currentAddress.district}, ${props.currentAddress.province}, ${props.currentAddress.country}`;
+        } else {
+          address = `${props.currentAddress?.country}, ${props.currentAddress?.zipcode}`;
+        }
+        let orderItems: OrderItem[] = [];
+        cartItems.forEach((item: ICart) => {
+          orderItems.push({
+            product: item.product._id,
+            quantity: item.quantity,
+          });
+        });
+        orderApi
+          .createOrder({
+            shippingFee: props.shippingFee,
+            address: address,
+            cartItems: orderItems,
+          })
+          .then((res) => {
+            dispatch(clearCart());
+            Swal.fire(
+              "Success",
+              "Thank you for purchase our products!",
+              "success"
+            ).then(() => {
+              navigate("/account/me/orders");
+              window.scrollTo(0, 0);
+            });
+          })
+          .catch((e) => {
+            console.log(e);
+            Swal.fire("Oops...!", "Something went wrong!", "error");
+          })
+          .finally(() => setIsLoading(false));
+      }
+    });
+  }, [props.currentAddress]);
   return (
-    <div className="pt-14">
+    <div className="pt-14 max-md:pt-6">
       {isShow && (
         <ChangeAddress
-          setCurrentAddress={setCurrentAddress}
+          setCurrentAddress={props.setCurrentAddress}
           setIsShow={setIsShow}
         />
       )}
-      <div className="mb-5">
+      <div className="mb-8">
         <h3 className="font-semibold text-2xl mb-4">Contact</h3>
         <div className="flex gap-4 justify-between mb-2">
           <p className="basis-2/5">Email:</p>{" "}
@@ -37,16 +101,18 @@ export default function Information(props: IInformationProps) {
           <p className="basis-2/5">Address:</p>
           <div className="basis-3/5 text-end">
             {user.address ? (
-              currentAddress?.country === "Viet Nam" ? (
+              props.currentAddress?.country === "Viet Nam" ? (
                 <p className="capitalize">
-                  {currentAddress?.detailAddress}, {currentAddress?.ward},{" "}
-                  {currentAddress?.district}, {currentAddress?.province},{" "}
-                  {currentAddress?.country}
+                  {props.currentAddress?.detailAddress},{" "}
+                  {props.currentAddress?.ward}, {props.currentAddress?.district}
+                  , {props.currentAddress?.province},{" "}
+                  {props.currentAddress?.country}
                 </p>
               ) : (
                 <div className="">
                   <p className="">
-                    {currentAddress?.country}, {currentAddress?.zipcode}
+                    {props.currentAddress?.country},{" "}
+                    {props.currentAddress?.zipcode}
                   </p>
                 </div>
               )
@@ -63,6 +129,51 @@ export default function Information(props: IInformationProps) {
             </p>
           </div>
         </div>
+      </div>
+      <div className="mb-8">
+        <h3 className="font-semibold text-2xl mb-4">Shipping</h3>
+        <div className="p-4 border border-fresh bg-light-fresh rounded flex justify-between items-center">
+          <div className="flex gap-2">
+            <div className="relative bg-fresh rounded-full w-5 h-5">
+              <div className="absolute rounded-full w-2 h-2 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] bg-white"></div>
+            </div>
+            <p>Fast</p>
+          </div>
+          <i className="fa-light fa-truck-fast text-fresh"></i>
+        </div>
+      </div>
+      <div className="mb-8">
+        <h3 className="font-semibold text-2xl mb-4">Payment</h3>
+        <PaymentItem
+          icon="fa-light fa-money-bill-wave"
+          payment={payment}
+          setPayment={setPayment}
+          paymentMethod="delivery"
+        />
+        <PaymentItem
+          icon="fa-brands fa-paypal"
+          payment={payment}
+          setPayment={setPayment}
+          paymentMethod="paypal"
+        />
+      </div>
+      <div className="mb-8">
+        {payment === "delivery" ? (
+          isLoading ? (
+            <button className="bg-fresh text-white w-full uppercase py-3 rounded hover:bg-black duration-300">
+              <CircularProgress size={16} sx={{ color: "white" }} />
+            </button>
+          ) : (
+            <button
+              className="bg-fresh text-white w-full uppercase py-3 rounded hover:bg-black duration-300"
+              onClick={handleCreateOrder}
+            >
+              Create Order
+            </button>
+          )
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

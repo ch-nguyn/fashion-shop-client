@@ -10,7 +10,7 @@ export default function CheckoutItem(props: ICheckoutItemProps) {
   return (
     <div className="flex justify-between mb-5 items-center">
       <div className="basis-3/5 flex items-center">
-        <div className="w-[30%] mr-4 relative ">
+        <div className="w-[45%] mr-4 relative">
           <img
             src={props.product.photo[0]}
             className="rounded-lg border border-light"
@@ -20,7 +20,7 @@ export default function CheckoutItem(props: ICheckoutItemProps) {
             {props.quantity}
           </span>
         </div>
-        <p className=" text-sm">{props.product.name}</p>
+        <p className=" w-full text-sm">{props.product.name}</p>
       </div>
       <div className="basis-2/5 text-end">
         $

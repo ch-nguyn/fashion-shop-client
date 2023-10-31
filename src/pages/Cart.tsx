@@ -11,6 +11,7 @@ export interface ICartProps {}
 
 export default function Cart(props: ICartProps) {
   const { cartItems } = useAppSelector((state) => state.product);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {

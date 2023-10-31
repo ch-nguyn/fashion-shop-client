@@ -18,13 +18,6 @@ export default function NewProduct() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const cartItems = localStorage.getItem("cart");
-    if (cartItems) {
-      dispatch(getCartProduct(JSON.parse(cartItems)));
-    }
-  }, []);
-
-  useEffect(() => {
     if (cartItems.length > 0) {
       localStorage.setItem("cart", JSON.stringify(cartItems));
     }
