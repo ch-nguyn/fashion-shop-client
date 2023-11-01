@@ -10,6 +10,7 @@ import { IUser } from "../interfaces/userInterface";
 import { getUserStart } from "../features/slice/userSlice";
 import ChangePassword from "../components/dashboard/ChangePassword";
 import Address from "../components/dashboard/Address";
+import Orders from "../components/dashboard/Orders";
 
 export interface IDashBoardProps {}
 
@@ -97,6 +98,7 @@ export default function DashBoard(props: IDashBoardProps) {
           <AccountDetails setIsChange={setIsChange} isLoading={isLoading} />
         )}
         {folder === "change-password" && <ChangePassword />}
+        {folder === "orders" && <Orders />}
         {folder === "addresses" && <Address setRecall={setRecall} />}
       </div>
     </div>

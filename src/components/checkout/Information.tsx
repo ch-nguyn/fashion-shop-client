@@ -14,11 +14,14 @@ import {
   clearCart,
   removeCartProduct,
 } from "../../features/slice/productSlice";
+import { PayPalButton } from "react-paypal-button-v2";
+import axios from "axios";
 
 export interface IInformationProps {
   currentAddress: IAddress | undefined;
   setCurrentAddress: React.Dispatch<React.SetStateAction<IAddress | undefined>>;
   shippingFee: number;
+  subtotal: number;
 }
 
 export default function Information(props: IInformationProps) {
@@ -29,6 +32,7 @@ export default function Information(props: IInformationProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [sdkReady, setSdkReady] = useState<boolean>(false);
   const handleCreateOrder = useCallback(() => {
     Swal.fire({
       title: "Create order?",
@@ -79,6 +83,61 @@ export default function Information(props: IInformationProps) {
       }
     });
   }, [props.currentAddress]);
+
+  const paypalOrder = useCallback(
+    (details: any, data: any) => {
+      let address: string = "";
+      if (props.currentAddress?.country === "Viet Nam") {
+        address = `${props.currentAddress.detailAddress}, ${props.currentAddress.ward}, ${props.currentAddress.district}, ${props.currentAddress.province}, ${props.currentAddress.country}`;
+      } else {
+        address = `${props.currentAddress?.country}, ${props.currentAddress?.zipcode}`;
+      }
+      let orderItems: OrderItem[] = [];
+      cartItems.forEach((item: ICart) => {
+        orderItems.push({
+          product: item.product._id,
+          quantity: item.quantity,
+        });
+      });
+      orderApi
+        .createOrder({
+          shippingFee: props.shippingFee,
+          address: address,
+          cartItems: orderItems,
+          isPaid: true,
+        })
+        .then((res) => {
+          dispatch(clearCart());
+          Swal.fire(
+            "Success",
+            "Thank you for purchase our products!",
+            "success"
+          ).then(() => {
+            navigate("/account/me/orders");
+            window.scrollTo(0, 0);
+          });
+        })
+        .catch((e) => {
+          console.log(e);
+          Swal.fire("Oops...!", "Something went wrong!", "error");
+        });
+    },
+    [props.currentAddress]
+  );
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios.get("/api/v1/payment/config");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://www.paypal.com/sdk/js?client-id=${data.data}`;
+      script.async = true;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    })();
+  }, []);
+
   return (
     <div className="pt-14 max-md:pt-6">
       {isShow && (
@@ -172,7 +231,15 @@ export default function Information(props: IInformationProps) {
             </button>
           )
         ) : (
-          <></>
+          <PayPalButton
+            amount={props.subtotal + props.shippingFee}
+            // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+
+            onSuccess={paypalOrder}
+            onError={() =>
+              Swal.fire("Oops...!", `Something went wrong!`, "error")
+            }
+          />
         )}
       </div>
     </div>

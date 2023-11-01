@@ -51,6 +51,7 @@ export default function Checkout(props: ICheckoutProps) {
       <div className=" mb-24 flex max-w-[1200px] mx-auto max-md:px-0 px-5 gap-10 max-md:flex-wrap-reverse max-md:gap-0">
         <div className="basis-1/2 max-md:basis-full max-md:px-5">
           <Information
+            subtotal={subtotal}
             currentAddress={currentAddress}
             setCurrentAddress={setCurrentAddress}
             shippingFee={shippingFee}
