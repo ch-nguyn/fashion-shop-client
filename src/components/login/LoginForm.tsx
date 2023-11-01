@@ -40,13 +40,14 @@ export default function LoginForm(props: ILoginFormProps) {
           });
         }
       })
-      .catch((e: any) =>
+      .catch((e: any) => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
           text: e.response.data.message,
-        })
-      )
+        });
+        props.setLogin({ ...props.login, password: "" });
+      })
       .finally(() => setIsLoading(false));
   };
 

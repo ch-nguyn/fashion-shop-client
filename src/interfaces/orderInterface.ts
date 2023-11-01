@@ -28,4 +28,5 @@ export interface IOrder {
   subtotal: number;
   total: number;
   orderItems: OrderProduct[];
+  address: string;
 }

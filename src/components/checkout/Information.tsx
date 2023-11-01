@@ -32,7 +32,6 @@ export default function Information(props: IInformationProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [sdkReady, setSdkReady] = useState<boolean>(false);
   const handleCreateOrder = useCallback(() => {
     Swal.fire({
       title: "Create order?",
@@ -41,7 +40,7 @@ export default function Information(props: IInformationProps) {
       showCancelButton: true,
       confirmButtonColor: "#0cc3ce",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Yes, order now!",
     }).then((result) => {
       if (result.isConfirmed) {
         setIsLoading(true);
@@ -128,12 +127,7 @@ export default function Information(props: IInformationProps) {
     (async () => {
       const { data } = await axios.get("/api/v1/payment/config");
       const script = document.createElement("script");
-      script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${data.data}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
       document.body.appendChild(script);
     })();
   }, []);

@@ -43,7 +43,7 @@ export default function Address(props: IAddressProps) {
   return (
     <div>
       <p className="text-gray mb-4 ">
-        The following addresses will be used on the checkout page by default.
+        The following address will be used on the checkout page by default.
       </p>
       <h3 className="font-semibold text-2xl mb-6">Shipping addresses</h3>
       {user.address?.length === 0 ? (

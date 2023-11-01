@@ -28,10 +28,9 @@ const refreshAccessToken = async (): Promise<any> => {
   } catch (error: any) {
     console.log(error);
 
-    if (error.response.data.message === "Refresh Token is not valid") {
-      Cookies.remove("refreshToken");
-      window.location.reload();
-    }
+    Cookies.remove("refreshToken");
+    window.location.reload();
+
     // Handle the token refresh error
     throw new Error("Token refresh failed");
   }

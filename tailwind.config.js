@@ -15,6 +15,8 @@ module.exports = {
       error: "red",
       "light-fresh": "#e6fbfc",
       warn: "#ff9966",
+      success: "#53a653",
+      delivering: "#78bcc4",
     },
     backgroundImage: {
       "slider-1":
