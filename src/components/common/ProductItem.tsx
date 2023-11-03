@@ -54,7 +54,7 @@ function ProductItem(props: IProductItemProps) {
         navigate(`/products/${props.product?._id}`);
         window.scrollTo(0, 0);
       }}
-      className="mb-10 mx-3 pb-4  relative border-light cursor-pointer group/new-collection "
+      className="mb-10 mx-3 max-sm:mx-1 pb-4  relative border-light cursor-pointer group/new-collection "
     >
       <span>
         <img

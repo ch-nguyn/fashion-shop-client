@@ -49,6 +49,11 @@ module.exports = {
         "0%": { opacity: 0.4, transform: "translate(0,-50%)" },
         "100%": { opacity: 1 },
       },
+      bounce: {
+        "0%": { transform: "translateY(0)" },
+        "50%": { transform: "translateY(10%)" },
+        "1000%": { transform: "translateY(0)" },
+      },
     },
   },
   plugins: [],

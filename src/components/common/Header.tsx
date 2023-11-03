@@ -5,6 +5,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { getCartProduct } from "../../features/slice/productSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { ICart } from "../../interfaces/productInterface";
+import Search from "./Search";
 
 export default function Header() {
   const [headerEls, setHeaderEls] = useState<string[]>([
@@ -14,6 +15,7 @@ export default function Header() {
     "contact",
   ]);
   const navigate = useNavigate();
+  const [isShowSearch, setIsShowSearch] = useState<boolean>(false);
   const { cartItems } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -68,9 +70,11 @@ export default function Header() {
           ))}
         </div>
         <div className="flex gap-8 ml-4 items-center text-xl">
-          <span className=" duration-200 hover:text-fresh cursor-pointer leading-[85px]">
-            <i className="fa-regular fa-magnifying-glass fa-rotate-90"></i>
-          </span>
+          <Search
+            isShowSearch={isShowSearch}
+            setIsShowSearch={setIsShowSearch}
+          ></Search>
+
           <span
             onClick={() => {
               navigate("/cart");

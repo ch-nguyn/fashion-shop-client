@@ -12,6 +12,7 @@ import Share from "../components/productDetail/Share";
 import Information from "../components/productDetail/Information";
 import { getUserStart } from "../features/slice/userSlice";
 import Swal from "sweetalert2";
+import ProductDetailSke from "../components/skeleton/ProductDetailSke";
 
 export interface IProductDetailProps {}
 
@@ -36,13 +37,15 @@ export default function ProductDetailPage() {
   });
   const navigate = useNavigate();
   const [isReview, setIsReview] = useState<boolean>(false);
-  const { isLoading } = useAppSelector((state) => state.product);
   const { user } = useAppSelector((state) => state.user);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
         const res: AxiosResponse = await productApi.getSingleProduct(id);
+        setIsLoading(false);
         setProduct(res.data.product);
       } catch (e) {
         Swal.fire("Oops...!", "There's no product with that ID", "error").then(
@@ -62,14 +65,20 @@ export default function ProductDetailPage() {
   return (
     <div className="mt-[85px] max-md:mt-0">
       <Header product={product} />
-      <Detail isLoading={isLoading} product={product} />
-      <Share isLoading={isLoading} />
-      <Information
-        isReview={isReview}
-        setIsReview={setIsReview}
-        user={user}
-        product={product}
-      />
+      {isLoading ? (
+        <ProductDetailSke />
+      ) : (
+        <>
+          <Detail product={product} />
+          <Share />
+          <Information
+            isReview={isReview}
+            setIsReview={setIsReview}
+            user={user}
+            product={product}
+          />
+        </>
+      )}
     </div>
   );
 }

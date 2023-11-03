@@ -213,7 +213,7 @@ export default function ProductList(props: IProductListProps) {
           ))}
       </div>
 
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap max-sm:px-2">
         {isLoading || props.loadingDebounce ? (
           <ProductListSke />
         ) : props.filteredProducts.length > 0 ? (

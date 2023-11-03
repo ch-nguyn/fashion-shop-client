@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../common/Footer";
 import authApi from "../../api/modules/authApi";
 import HeaderMobile from "../common/HeaderMobile";
+import ScrollTopBtn from "../common/ScrollTopBtn";
 
 export interface IMainLayoutProps {}
 
@@ -14,6 +15,7 @@ export default function MainLayout(props: IMainLayoutProps) {
       <HeaderMobile />
       <Outlet />
       <Footer />
+      <ScrollTopBtn />
     </>
   );
 }

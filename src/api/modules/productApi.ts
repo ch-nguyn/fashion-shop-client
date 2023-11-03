@@ -10,6 +10,8 @@ const productApi = {
   deleteProduct: (id: string) => privateClient.delete(`/products/${id}`),
   updateProduct: (id: string, params: any) =>
     privateClient.patch(`/products/${id}`, params),
+  searchProduct: (name: string) =>
+    publicClient.get(`/products/search?name=${name}`),
 };
 
 export default productApi;
