@@ -17,6 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cart from "./pages/Cart";
 import VerifyAccount from "./pages/VerifyAccount";
 import Checkout from "./pages/Checkout";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -58,9 +59,11 @@ function App() {
               element={<ResetPassword />}
             ></Route>
           </Route>
+          <Route path="/not-found" element={<NotFound />} />
         </Route>
 
         <Route path="/" element={<Navigate to={"/home"} />}></Route>
+        <Route path="*" element={<Navigate to={"/not-found"} />}></Route>
       </Routes>
     </div>
   );
