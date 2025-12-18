@@ -82,7 +82,7 @@ export default function Detail(props: IDetailProps) {
       <div className="flex gap-5 relative max-w-[1200px] mx-auto mb-10 max-xl:px-5 max-md:flex-wrap max-md:gap-10">
         <div className="basis-[60%] flex gap-5 max-md:basis-full max-sm:gap-0">
           <div className="basis-[20%] max-sm:basis-0">
-            {props.product?.photo.map((photo: string) => (
+            {props.product?.photo?.map((photo: string) => (
               <div
                 onClick={() => setCurrentImg(photo)}
                 key={Math.random()}
@@ -157,7 +157,7 @@ export default function Detail(props: IDetailProps) {
             </p>
             <p className="mb-1 font-semibold">
               Categories:{" "}
-              {props.product?.category.map(
+              {props.product?.category?.map(
                 (category: string, index: number) => (
                   <span
                     key={Math.random()}
@@ -171,7 +171,7 @@ export default function Detail(props: IDetailProps) {
             </p>
             <p className="mb-1 font-semibold">
               Tags:{" "}
-              {props.product?.tag.map((tag: string, index: number) => (
+              {props.product?.tag?.map((tag: string, index: number) => (
                 <span
                   key={Math.random()}
                   className="text-gray font-normal hover:text-fresh capitalize"

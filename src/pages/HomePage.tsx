@@ -21,6 +21,7 @@ export default function HomePage(props: IHomePageProps) {
   );
   const dispatch = useAppDispatch();
   useEffect(() => {
+      //call api
     dispatch(getProductsStart());
     const cartItems = localStorage.getItem("cart");
     if (cartItems) {

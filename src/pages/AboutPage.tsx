@@ -52,17 +52,17 @@ export default function AboutPage(props: IAboutPageProps) {
   const [personInfo, setPersonInfo] = useState<IPerson[]>([
     {
       img: "https://suprema.qodeinteractive.com/wp-content/uploads/2016/01/home-main-team-1.jpg",
-      name: "Maria Jackson",
+      name: "Chien Nguyen",
       role: "Creative Director",
     },
     {
       img: "https://suprema.qodeinteractive.com/wp-content/uploads/2016/01/home-main-team-5.jpg",
-      name: "Duncan Duffy",
+      name: "Huu Chien",
       role: "Designer",
     },
     {
       img: "https://suprema.qodeinteractive.com/wp-content/uploads/2016/01/home-main-team-4.jpg",
-      name: "Marc Johnson",
+      name: "Nguyen Huu Chien",
       role: "System Admin",
     },
   ]);

@@ -40,7 +40,6 @@ imageClient.interceptors.request.use(
   },
   function (error) {
     // Thực hiện kịch bản gì đó khi yêu cầu bị lỗi
-    console.log(2);
 
     return Promise.reject(error);
   }
