@@ -77,7 +77,7 @@ export default function AccountDetails(props: IAccountDetailsProps) {
       showCancelButton: true,
       confirmButtonColor: "#0cc3ce",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, log out now!",
+      confirmButtonText: "Yes, right now!",
     }).then((result) => {
       if (result.isConfirmed) {
         setSubmitLoading(true);
